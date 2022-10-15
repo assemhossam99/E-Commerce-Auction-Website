@@ -11,7 +11,12 @@ from .models import User
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    listings = Listing.objects.all()
+    return render(request, "auctions/index.html", 
+    {
+        'listings' : listings
+    }
+    )
 
 
 def login_view(request):
@@ -67,7 +72,6 @@ def register(request):
 
 @login_required(login_url='/login')
 def newItem(request):
-    # return render(request, 'auctions/newListing.html')
     if request.method == 'POST':
         form = newListingForm(request.POST)
         if form.is_valid():

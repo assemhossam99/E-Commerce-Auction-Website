@@ -3,6 +3,14 @@
 {% block body %}
     <div>{{message}}</div>
     <h2>Active Listings</h2>
-
-    TODO
+    {% for listing in listings %}
+        <a href = ''>
+            <div class = 'oneItem'>
+                <h2> {{listing.title}} </h2>
+                <div> {{listing.description}} </div>
+                <div> Price: {{listing.price}}$ </div>
+                <img class="image" src = '{{listing.image_url}}' alt = 'Listing image'>   
+            </div>
+        </a>
+    {% endfor %}
 {% endblock %}
