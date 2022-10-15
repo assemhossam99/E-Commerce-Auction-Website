@@ -18,16 +18,16 @@ class Bid(models.Model):
     price = models.IntegerField()
     date = models.DateField()
     listing = models.ForeignKey(Listing, on_delete = models.CASCADE, related_name = "bids")
-    # user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = "bids")
+    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = "bids", default = "")
 
     def __str__(self):
         return f"{self.id}: bid with value ({self.price}$) on item {self.listing.id}"
 
 class Comment(models.Model):
-    calue = models.CharField(max_length = 1024)
+    value = models.CharField(max_length = 1024)
     date = models.DateField()
     listing = models.ForeignKey(Listing, on_delete = models.CASCADE, related_name = "comments")
-    # user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = "comments")
+    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = "comments", default = "")
 
     def __str__(self):
-        return f"{self.id}: comment ({self.value}$) on item {self.listing.id}"
+        return f"{self.id}: comment ({self.value}) on item {self.listing.id}"
