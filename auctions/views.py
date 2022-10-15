@@ -4,6 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from .forms import newListingForm
+from .models import Listing
 
 from .models import User
 
@@ -65,4 +67,19 @@ def register(request):
 
 @login_required(login_url='/login')
 def newItem(request):
-    return HttpResponse("<div> Hello </div>")
+    # return render(request, 'auctions/newListing.html')
+    if request.method == 'POST':
+        form = newListingForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            price = form.cleaned_data['price']
+            image_url = form.cleaned_data['image_url']
+            l = Listing(title = title, description = description, price = price, image_url = image_url)
+            l.save()
+            return HttpResponseRedirect(reverse("index"))
+    else:
+        form = newListingForm()
+
+    return render(request, 'auctions/newListing.html', {'form': form})
+    
