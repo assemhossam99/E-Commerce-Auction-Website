@@ -3,6 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from .models import User
 
@@ -35,7 +36,6 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
 
-
 def register(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -61,3 +61,8 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
+
+
+@login_required(login_url='/login')
+def newItem(request):
+    return HttpResponse("<div> Hello </div>")
