@@ -6,10 +6,13 @@
     {% for listing in listings %}
         <a href = ''>
             <div class = 'oneItem'>
+                <div>User: {{listing.user.username}}</div>
                 <h2> {{listing.title}} </h2>
                 <div> {{listing.description}} </div>
                 <div> Price: {{listing.price}}$ </div>
-                <img class="image" src = '{{listing.image_url}}' alt = 'Listing image'>   
+                {% if listing.image_url %}
+                    <img class="image" src = '{{listing.image_url}}' alt = 'Listing image'>   
+                {% endif %}
             </div>
         </a>
     {% endfor %}

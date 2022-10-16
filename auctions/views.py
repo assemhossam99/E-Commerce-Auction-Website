@@ -79,7 +79,8 @@ def newItem(request):
             description = form.cleaned_data['description']
             price = form.cleaned_data['price']
             image_url = form.cleaned_data['image_url']
-            l = Listing(title = title, description = description, price = price, image_url = image_url)
+            user = request.user
+            l = Listing(title = title, description = description, price = price, image_url = image_url, user = user)
             l.save()
             return HttpResponseRedirect(reverse("index"))
     else:
