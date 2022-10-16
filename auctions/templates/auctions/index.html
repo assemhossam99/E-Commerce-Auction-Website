@@ -4,7 +4,7 @@
     <div>{{message}}</div>
     <h2>Active Listings</h2>
     {% for listing in listings %}
-        <a href = ''>
+        <a href = "{% url 'listingPage' listingID=listing.id %}">
             <div class = 'oneItem'>
                 <div>User: {{listing.user.username}}</div>
                 <h2> {{listing.title}} </h2>

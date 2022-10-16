@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h1>  Listing: {{listing.title}}</h1>
+    <div>Added by: {{listing.user.username}}</div>
+    <div> Description: {{listing.description}}</div>
+    <div> Price: {{listing.price}} </div>
+    {% if listing.image_url %}
+        <img src = {{listing.image_url}}, alt = "image">
+    {% endif %}
+    <div>
+        <a href="{% url 'index' %}">back to listing page</a>
+    </div>
+
+    {% if user.is_authenticated %}
+        {%if users%}
+            {% if user in users %}
+                <a href="">Remove from watchlist</div>
+            {% else %}
+                <a href="">Add to Watchlist</a>
+            {% endif %}
+        {% else %}
+            <a href="">Add to Watchlist</a>
+        {% endif %}
+    {% endif %}
+{% endblock %}

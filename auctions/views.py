@@ -88,3 +88,10 @@ def newItem(request):
 
     return render(request, 'auctions/newListing.html', {'form': form})
     
+def listingPage(request, listingID):
+    listing = Listing.objects.get(pk = listingID)
+    users = listing.watchList.all()
+    return render(request, 'auctions/listingPage.html', {
+        'listing' : listing,
+        'users' : users
+        })
