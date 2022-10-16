@@ -16,12 +16,21 @@
     {% if user.is_authenticated %}
         {%if users%}
             {% if user in users %}
-                <a href="">Remove from watchlist</div>
+                <input type="submit" value="Remove From WatchlistWatchlist">
             {% else %}
-                <a href="">Add to Watchlist</a>
+            <form action="{% url 'addToWatchlist' listing.id %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="users" value="{{user.id}}">
+                <input type="submit" value="Add to watchlist">
+            </form>
             {% endif %}
         {% else %}
-            <a href="">Add to Watchlist</a>
+        <form action="{% url 'addToWatchlist' listing.id %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="users" value="{{user.id}}">
+            <input  type="submit" value="Add to watchlist">
+        </form>
+
         {% endif %}
     {% endif %}
 {% endblock %}

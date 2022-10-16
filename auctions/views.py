@@ -95,3 +95,10 @@ def listingPage(request, listingID):
         'listing' : listing,
         'users' : users
         })
+
+def addToWatchlist(request, listingID):
+    # if request.method == "POST":
+        listing = Listing.objects.get(pk = listingID)
+        users = User.objects.get(pk = int(request.POST.get("users", False)))
+        listing.watchList.add(users)
+        return HttpResponseRedirect(reverse('listingPage', args=(listing.id,)))
